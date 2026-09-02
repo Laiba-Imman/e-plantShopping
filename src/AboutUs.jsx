@@ -1,52 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function AboutUs() {
+function AboutUs() {
   return (
-    <main className="about-page">
-      <section className="about-card">
-        <p className="eyebrow">About Paradise Nursery</p>
+    <div className="about-us-container">
 
-        <h1>Growing Happiness, One Plant at a Time</h1>
+      <h1>About Paradise Nursery</h1>
 
-        <p>
-          Paradise Nursery is an online plant shop created for people who
-          want to bring the beauty of nature into their homes.
-        </p>
+      <p>
+        Paradise Nursery is an online plant shopping company
+        that provides beautiful and healthy plants for homes,
+        offices and gardens.
+      </p>
 
-        <p>
-          We provide a variety of beautiful houseplants for beginners and
-          experienced plant lovers. Our goal is to make plant shopping
-          simple, friendly and enjoyable.
-        </p>
+      <p>
+        Our mission is to make it easy for everyone to bring
+        nature into their homes by providing a wide variety
+        of quality plants at affordable prices.
+      </p>
 
-        <div className="about-grid">
-          <div>
-            <h3>🌿 Our Mission</h3>
-            <p>
-              Make beautiful houseplants easy to discover and purchase.
-            </p>
-          </div>
+      <p>
+        We offer air-purifying plants, tropical plants and
+        succulent plants. We aim to provide customers with
+        a simple, convenient and enjoyable online shopping
+        experience.
+      </p>
 
-          <div>
-            <h3>🌱 Our Promise</h3>
-            <p>
-              Provide a simple shopping experience with clear plant details.
-            </p>
-          </div>
+      <Link to="/plants" className="primary-button">
+        Explore Plants
+      </Link>
 
-          <div>
-            <h3>🏡 Our Vision</h3>
-            <p>
-              Help more homes become greener, calmer and more beautiful.
-            </p>
-          </div>
-        </div>
-
-        <Link className="primary-button" to="/plants">
-          Explore Plants
-        </Link>
-      </section>
-    </main>
+    </div>
   );
 }
+
+export default AboutUs;

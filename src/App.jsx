@@ -1,13 +1,26 @@
-import React from "react";
-import { Link, Route, Routes, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import {
+  Link,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate
+} from "react-router-dom";
+
 import { useSelector } from "react-redux";
+
 import ProductList from "./ProductList";
 import CartItem from "./CartItem";
 import AboutUs from "./AboutUs";
 
+
 function Navbar() {
+
   const location = useLocation();
-  const cartItems = useSelector((state) => state.cart.items);
+
+  const cartItems = useSelector(
+    (state) => state.cart.items
+  );
 
   const totalItems = cartItems.reduce(
     (total, item) => total + item.quantity,
@@ -15,7 +28,8 @@ function Navbar() {
   );
 
   const showNavbar =
-    location.pathname === "/plants" || location.pathname === "/cart";
+    location.pathname === "/plants" ||
+    location.pathname === "/cart";
 
   if (!showNavbar) {
     return null;
@@ -23,63 +37,139 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <Link className="brand" to="/">
+
+      <Link to="/" className="brand">
         🌿 Paradise Nursery
       </Link>
 
       <div className="nav-links">
-        <Link to="/">Home</Link>
-        <Link to="/plants">Plants</Link>
 
-        <Link to="/cart" className="cart-link">
-          🛒 Cart
-          <span className="cart-count">{totalItems}</span>
+        <Link to="/">
+          Home
         </Link>
+
+        <Link to="/plants">
+          Plants
+        </Link>
+
+        <Link to="/cart">
+          🛒 Cart ({totalItems})
+        </Link>
+
       </div>
+
     </nav>
   );
 }
 
+
 function Home() {
+
+  const [showProducts, setShowProducts] =
+    useState(false);
+
+  const navigate = useNavigate();
+
+
+  const handleGetStarted = () => {
+
+    setShowProducts(true);
+
+    navigate("/plants");
+
+  };
+
+
+  if (showProducts) {
+
+    return <ProductList />;
+
+  }
+
+
   return (
+
     <main className="landing-page">
+
       <div className="landing-overlay">
+
         <section className="landing-content">
-          <p className="eyebrow">Welcome to Paradise Nursery</p>
 
-          <h1>Bring Nature Into Your Home</h1>
-
-          <p>
-            Discover beautiful houseplants for a greener, fresher and more
-            peaceful home.
+          <p className="eyebrow">
+            Welcome to Paradise Nursery
           </p>
 
-          <div className="landing-actions">
-            <Link className="primary-button" to="/plants">
-              Get Started
-            </Link>
+          <h1>
+            Bring Nature Into Your Home
+          </h1>
 
-            <Link className="secondary-button" to="/about">
-              About Us
-            </Link>
-          </div>
+          <p>
+            Discover beautiful houseplants for a
+            greener, fresher and more peaceful home.
+          </p>
+
+
+          <button
+            className="primary-button"
+            onClick={handleGetStarted}
+          >
+            Get Started
+          </button>
+
+
+          <Link
+            className="secondary-button"
+            to="/about"
+          >
+            About Us
+          </Link>
+
         </section>
+
       </div>
+
     </main>
+
   );
 }
 
-export default function App() {
+
+function App() {
+
   return (
+
     <>
+
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/plants" element={<ProductList />} />
-        <Route path="/cart" element={<CartItem />} />
-        <Route path="/about" element={<AboutUs />} />
+
+        <Route
+          path="/"
+          element={<Home />}
+        />
+
+        <Route
+          path="/plants"
+          element={<ProductList />}
+        />
+
+        <Route
+          path="/cart"
+          element={<CartItem />}
+        />
+
+        <Route
+          path="/about"
+          element={<AboutUs />}
+        />
+
       </Routes>
+
     </>
+
   );
 }
+
+
+export default App;
